@@ -1,0 +1,146 @@
+﻿<UserControl x:Class="eFootball_Editor.HOME_SECREEN"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:eFootball_Editor"
+             mc:Ignorable="d" 
+             d:DesignHeight="677" d:DesignWidth="1131" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FlowDirection="LeftToRight" Loaded="UserControl_Loaded">
+
+    <UserControl.Resources>
+        <Style TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="Padding" Value="2,0,0,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="true"/>
+                                    <Condition Property="Selector.IsSelectionActive" Value="false"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF3145B0"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </UserControl.Resources>
+    <Grid Background="White" HorizontalAlignment="Center" Width="1125">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="94*"/>
+            <RowDefinition Height="99*"/>
+            <RowDefinition Height="111*"/>
+            <RowDefinition Height="373*"/>
+        </Grid.RowDefinitions>
+        <ComboBox x:Name="TEAMS_COMBOBOX" Margin="66,65,0,0" Width="213" SelectionChanged="TEAMS_COMBOBOX_SelectionChanged" HorizontalAlignment="Left" BorderBrush="#FF0E39B9" OpacityMask="#FF0E39B9" Height="22" VerticalAlignment="Top">
+            <ComboBoxItem Content="MANCHESTER UNITED"/>
+            <ComboBoxItem Content="CHELSEA"/>
+            <ComboBoxItem Content="ASBA"/>
+            <ComboBoxItem Content="ME"/>
+        </ComboBox>
+        <ComboBox x:Name="TEAMS_COMBOBOX_Copy" Margin="384,65,0,0" Width="214" Height="22" SelectionChanged="TEAMS_COMBOBOX_Copy_SelectionChanged" HorizontalAlignment="Left" BorderBrush="#FF0E39B9" OpacityMask="#FF0E39B9" VerticalAlignment="Top">
+            <ComboBoxItem Content="MANCHESTER UNITED"/>
+            <ComboBoxItem Content="CHELSEA"/>
+            <ComboBoxItem Content="ASBA"/>
+            <ComboBoxItem Content="ME"/>
+        </ComboBox>
+        <ListBox x:Name="TEAM1PLAYERLIST" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="66,2,0,30" HorizontalAlignment="Left" Width="248" Grid.RowSpan="3" BorderBrush="#FF0E39B9" AllowDrop="True" FontWeight="Normal" FontFamily="Segoe UI Historic" FontStyle="Normal" Grid.Row="1"/>
+        <ListBox x:Name="TEAM2PLAYERLIST" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="384,2,0,30" HorizontalAlignment="Left" Width="248" Grid.RowSpan="3" BorderBrush="#FF0E39B9" FontWeight="Normal" FontFamily="Segoe UI Historic" FontStyle="Normal" Grid.Row="1"/>
+        <Image x:Name="FROMTEAMB" Margin="329,0,0,18" Source="/Images/fromoff.png" Cursor="Hand" MouseEnter="FROMTEAMB_MouseEnter" MouseLeave="FROMTEAMB_MouseLeave" MouseLeftButtonDown="FROMTEAMB_MouseLeftButtonDown" Stretch="Uniform" StretchDirection="DownOnly" HorizontalAlignment="Left" Width="44" RenderTransformOrigin="0.5,0.656" Grid.Row="2"/>
+        <Image x:Name="EXCHANGEPLAYERS" Margin="329,64,0,329" Source="/Images/swapoff.png" Cursor="Hand" MouseEnter="EXCHANGEPLAYERS_MouseEnter" MouseLeave="EXCHANGEPLAYERS_MouseLeave" HorizontalAlignment="Left" StretchDirection="DownOnly" Grid.Row="2" Width="44" MouseLeftButtonDown="EXCHANGEPLAYERS_MouseLeftButtonDown" Grid.RowSpan="2"/>
+        <Image x:Name="TOTEAMB" Margin="329,13,0,257" Source="/Images/tooff.png" Cursor="Hand" MouseEnter="TOTEAMB_MouseEnter" MouseLeave="TOTEAMB_MouseLeave" MouseLeftButtonDown="TOTEAMB_MouseLeftButtonDown" HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Grid.Row="3" Width="44" RenderTransformOrigin="0.5,0.09"/>
+        <Image x:Name="UP" Margin="586,41,0,18" Source="/Images/fromoff.png" Cursor="Hand" Stretch="Uniform" StretchDirection="DownOnly" HorizontalAlignment="Left" Width="44" RenderTransformOrigin="0.5,0.656" MouseEnter="UP_MouseEnter" MouseLeave="UP_MouseLeave" MouseLeftButtonDown="UP_MouseLeftButtonDown">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="91.368"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image x:Name="DOWN" Margin="622,48,0,0" Source="/Images/fromoff.png" Cursor="Hand" Stretch="Uniform" StretchDirection="DownOnly" HorizontalAlignment="Left" Width="44" RenderTransformOrigin="0.5,0.656" MouseEnter="DOWN_MouseEnter" MouseLeave="DOWN_MouseLeave" MouseLeftButtonDown="DOWN_MouseLeftButtonDown" Height="35" VerticalAlignment="Top">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90.482"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image x:Name="UP_Copy" Margin="268,40,0,0" Source="/Images/fromoff.png" Cursor="Hand" Stretch="Uniform" StretchDirection="DownOnly" HorizontalAlignment="Left" Width="44" RenderTransformOrigin="0.5,0.656" MouseEnter="UP_Copy_MouseEnter" MouseLeave="UP_Copy_MouseLeave" MouseLeftButtonDown="UP_Copy_MouseLeftButtonDown" Height="35" VerticalAlignment="Top">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="91.368"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image x:Name="DOWN_Copy" Margin="305,49,0,0" Source="/Images/fromoff.png" Cursor="Hand" Stretch="Uniform" StretchDirection="DownOnly" HorizontalAlignment="Left" Width="44" RenderTransformOrigin="0.5,0.656" MouseEnter="DOWN_Copy_MouseEnter" MouseLeave="DOWN_Copy_MouseLeave" MouseLeftButtonDown="DOWN_Copy_MouseLeftButtonDown" Height="35" VerticalAlignment="Top">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90.482"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Label x:Name="TOTAL_SQUAD1" Content="TOTAL PLAYERS IN TEAM A" HorizontalAlignment="Left" Margin="91,0,0,0" Grid.Row="3" VerticalAlignment="Bottom" Width="248" FontFamily="Segoe UI" FontStyle="Italic" FontWeight="Bold"/>
+        <Label x:Name="TOTAL_SQUAD2" Content="TOTAL PLAYERS IN TEAM B" HorizontalAlignment="Left" Margin="425,0,0,0" Grid.Row="3" VerticalAlignment="Bottom" Width="248" FontFamily="Segoe UI" FontStyle="Italic" FontWeight="Bold"/>
+        <CheckBox x:Name="nationalteamb" Content="National Team" HorizontalAlignment="Left" Margin="443,45,0,0" VerticalAlignment="Top" Foreground="#FF3D56DC"/>
+        <CheckBox x:Name="nationalteama" Content="National Team" HorizontalAlignment="Left" Margin="125,45,0,0" VerticalAlignment="Top" Foreground="#FF3D56DC"/>
+        <Image x:Name="REMOVEPLAYERA" Margin="66,47,0,0" Source="/Images/minus.png" Stretch="Fill" Cursor="Hand" MouseLeftButtonDown="Image_MouseLeftButtonDown" HorizontalAlignment="Left" Width="14" Height="19" VerticalAlignment="Top"/>
+        <Image x:Name="REMOVEPLAYERB" Margin="385,44,0,0" Source="/Images/minus.png" Stretch="Fill" Cursor="Hand" MouseLeftButtonDown="Image_MouseLeftButtonDown_1" HorizontalAlignment="Left" Width="14" Height="18" VerticalAlignment="Top"/>
+        <ListBox x:Name="ALLPLAYERSLIST_Copy" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="684,88,0,16" HorizontalAlignment="Left" Width="252" Grid.RowSpan="4" BorderBrush="#FF0E39B9" FontWeight="Normal" FontStyle="Normal" FontFamily="Segoe UI Semibold" Visibility="Hidden" IsSynchronizedWithCurrentItem="False"/>
+        <GroupBox x:Name="TEAMAINFO" Header="TEAM A" Margin="665,27,0,3" Grid.RowSpan="3" HorizontalAlignment="Left" Width="218"/>
+        <TextBox x:Name="TEAM_A_SHORT_NAME" HorizontalAlignment="Left" Margin="685,0,0,14" TextWrapping="Wrap" Text="TEAM NAME" Width="178" Grid.Row="2" Height="18" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="TEAM_A_ID" HorizontalAlignment="Left" Margin="685,0,0,74" TextWrapping="Wrap" Text="TEAM ID" Width="178" Grid.Row="2" Height="18" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="TEAM_A_NAME" HorizontalAlignment="Left" Margin="685,0,0,45" TextWrapping="Wrap" Text="TEAM SHORTNAME" Width="178" Grid.Row="2" Height="18" VerticalAlignment="Bottom"/>
+        <GroupBox x:Name="TEAMBINFO" Header="TEAM B" Margin="897,27,0,3" Grid.RowSpan="3" HorizontalAlignment="Left" Width="218"/>
+        <GroupBox x:Name="PLAYER_A_INFO" Header="PLAYER A" Margin="665,7,0,10" Grid.Row="3" HorizontalAlignment="Left" Width="218"/>
+        <GroupBox x:Name="PLAYER_B_INFO" Header="PLAYER B" Margin="897,7,0,10" Grid.Row="3" HorizontalAlignment="Left" Width="218"/>
+        <TextBox x:Name="TEAM_A_SHORT_NAME_Copy" HorizontalAlignment="Left" Margin="917,0,0,14" TextWrapping="Wrap" Text="TEAM SHORTNAME" Width="178" Grid.Row="2" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="TEAM_A_ID_Copy" HorizontalAlignment="Left" Margin="917,0,0,74" TextWrapping="Wrap" Text="TEAM ID" Width="178" Grid.Row="2" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="TEAM_A_NAME_Copy" HorizontalAlignment="Left" Margin="917,0,0,45" TextWrapping="Wrap" Text="TEAM NAME" Width="178" Grid.Row="2" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="TEAM_A_SHORT_NAME_Copy1" HorizontalAlignment="Left" Margin="685,0,0,48" TextWrapping="Wrap" Text="SHIRT NAME" Width="178" Grid.Row="3" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="TEAM_A_ID_Copy1" HorizontalAlignment="Left" Margin="685,0,0,108" TextWrapping="Wrap" Text="PLAYER ID" Width="178" Grid.Row="3" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="TEAM_A_NAME_Copy1" HorizontalAlignment="Left" Margin="685,0,0,79" TextWrapping="Wrap" Text="PLAYER NAME" Width="178" Grid.Row="3" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="TEAM_A_SHORT_NAME_Copy2" HorizontalAlignment="Left" Margin="917,0,0,48" TextWrapping="Wrap" Text="SHIRT NAME" Width="178" Grid.Row="3" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="TEAM_A_ID_Copy2" HorizontalAlignment="Left" Margin="917,0,0,108" TextWrapping="Wrap" Text="PLAYER ID" Width="178" Grid.Row="3" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="TEAM_A_NAME_Copy2" HorizontalAlignment="Left" Margin="917,0,0,79" TextWrapping="Wrap" Text="PLAYER NAME" Width="178" Grid.Row="3" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="TEAM_A_SHORT_NAME_Copy3" HorizontalAlignment="Left" Margin="685,0,0,21" TextWrapping="Wrap" Text="NATIONAL SHIRT NAME" Width="178" Grid.Row="3" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="TEAM_A_SHORT_NAME_Copy4" HorizontalAlignment="Left" Margin="917,0,0,21" TextWrapping="Wrap" Text="NATIONAL SHIRT NAME" Width="178" Grid.Row="3" VerticalAlignment="Bottom"/>
+        <Image x:Name="ADDPLAYERA" Margin="66,23,0,0" Source="/Images/add.png" Stretch="Fill" Cursor="Hand" MouseLeftButtonDown="Image_MouseLeftButtonDown" HorizontalAlignment="Left" Width="14" Height="19" VerticalAlignment="Top"/>
+        <TextBox x:Name="IDFREEPLAYERA" HorizontalAlignment="Left" Margin="85,24,0,0" TextWrapping="Wrap" Text="ID FREE PLAYER" VerticalAlignment="Top" Width="194"/>
+        <Image x:Name="ADDPLAYERA_Copy" Margin="385,23,0,0" Source="/Images/add.png" Stretch="Fill" Cursor="Hand" MouseLeftButtonDown="Image_MouseLeftButtonDown" HorizontalAlignment="Left" Width="14" Height="19" VerticalAlignment="Top"/>
+        <TextBox x:Name="IDFREEPLAYERA_Copy" HorizontalAlignment="Left" Margin="404,24,0,0" TextWrapping="Wrap" Text="ID FREE PLAYER" VerticalAlignment="Top" Width="194"/>
+
+
+
+    </Grid>
+</UserControl>
